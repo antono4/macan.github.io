@@ -1,11 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website - Modern Responsive Design</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .logo { font-size: 1.5rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s; font-weight: 500; }
+        .nav-links a:hover { color: var(--primary-color); }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .menu-toggle span { width: 25px; height: 3px; background: var(--text-primary); border-radius: 3px; }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 5% 4rem; text-align: center; background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, transparent 50%); }
+        .hero-content { max-width: 800px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.2; }
+        .hero h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2rem; }
+        .btn { display: inline-block; padding: 0.875rem 2rem; background: var(--gradient); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s, box-shadow 0.3s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary-color); margin-left: 1rem; }
+        .btn-outline:hover { background: var(--primary-color); }
+        section { padding: 5rem 5%; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .section-title p { color: var(--text-secondary); }
+        .about { background: var(--bg-card); }
+        .about-content { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-image { width: 100%; aspect-ratio: 1; background: var(--gradient); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; }
+        .about-text h3 { font-size: 1.75rem; margin-bottom: 1rem; }
+        .about-text p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .skill-card { background: var(--bg-card); padding: 2rem; border-radius: 16px; text-align: center; transition: transform 0.3s; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .skill-card:hover { transform: translateY(-5px); }
+        .skill-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .skill-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .skill-card p { color: var(--text-secondary); font-size: 0.9rem; }
+        .projects { background: var(--bg-card); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .project-card { background: var(--bg-dark); border-radius: 16px; overflow: hidden; transition: transform 0.3s; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .project-card:hover { transform: translateY(-5px); }
+        .project-image { height: 200px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .project-content { padding: 1.5rem; }
+        .project-content h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .project-content p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+        .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .tag { background: rgba(99, 102, 241, 0.2); color: var(--primary-color); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; }
+        .contact-content { max-width: 600px; margin: 0 auto; text-align: center; }
+        .contact-content p { color: var(--text-secondary); margin-bottom: 2rem; }
+        .social-links { display: flex; justify-content: center; gap: 1.5rem; }
+        .social-link { width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; text-decoration: none; transition: transform 0.3s; }
+        .social-link:hover { transform: translateY(-3px); background: var(--primary-color); }
+        footer { background: var(--bg-card); padding: 2rem 5%; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        footer p { color: var(--text-secondary); }
+        footer a { color: var(--primary-color); text-decoration: none; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-dark); flex-direction: column; padding: 2rem; gap: 1.5rem; text-align: center; }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1rem; }
+            .btn { display: block; margin: 0.5rem 0; }
+            .btn-outline { margin-left: 0; }
+            .about-content { grid-template-columns: 1fr; gap: 2rem; }
+            .about-image { max-width: 250px; margin: 0 auto; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-
-    <footer style="text-align:center;padding:20px;font-size:14px;color:#666;">
-        Created by Antono
-    </footer>
+    <nav>
+        <div class="logo">Portofolio</div>
+        <ul class="nav-links">
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#skills">Keahlian</a></li>
+            <li><a href="#projects">Proyek</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    </nav>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hi, Saya <span>Antono</span></h1>
+            <p>Web Developer & Designer - Membangun pengalaman digital yang modern dan responsif</p>
+            <a href="#projects" class="btn">Lihat Proyek</a>
+            <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="section-title"><h2>Tentang Saya</h2><p>Kenali lebih dekat dengan saya</p></div>
+        <div class="about-content">
+            <div class="about-image">👨‍💻</div>
+            <div class="about-text">
+                <h3>Web Developer Passionate</h3>
+                <p>Saya adalah seorang web developer yang passionate dalam membangun website modern dan responsif. Dengan pengalaman dalam berbagai teknologi web, saya selalu berusaha menciptakan pengalaman pengguna yang terbaik.</p>
+                <p>Saya senang belajar hal baru dan selalu up-to-date dengan perkembangan teknologi terbaru dalam dunia web development.</p>
+            </div>
+        </div>
+    </section>
+    <section id="skills">
+        <div class="section-title"><h2>Keahlian</h2><p>Teknologi yang saya kuasai</p></div>
+        <div class="skills-grid">
+            <div class="skill-card"><div class="skill-icon">🎨</div><h3>Frontend Development</h3><p>HTML, CSS, JavaScript, React, Vue.js</p></div>
+            <div class="skill-card"><div class="skill-icon">⚙️</div><h3>Backend Development</h3><p>Node.js, Python, PHP, Database</p></div>
+            <div class="skill-card"><div class="skill-icon">📱</div><h3>Responsive Design</h3><p>Mobile-first approach, Flexbox, Grid</p></div>
+            <div class="skill-card"><div class="skill-icon">🚀</div><h3>Performance</h3><p>Optimization, SEO, Loading Speed</p></div>
+        </div>
+    </section>
+    <section class="projects" id="projects">
+        <div class="section-title"><h2>Proyek</h2><p>Karya terbaik saya</p></div>
+        <div class="projects-grid">
+            <div class="project-card"><div class="project-image">🌐</div><div class="project-content"><h3>Website Company Profile</h3><p>Website responsif untuk perusahaan dengan desain modern dan fitur lengkap</p><div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></div></div>
+            <div class="project-card"><div class="project-image">🛒</div><div class="project-content"><h3>E-Commerce Platform</h3><p>Platform belanja online dengan sistem keranjang dan pembayaran</p><div class="project-tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span></div></div></div>
+            <div class="project-card"><div class="project-image">📊</div><div class="project-content"><h3>Dashboard Analytics</h3><p>Sistem dashboard dengan visualisasi data real-time</p><div class="project-tags"><span class="tag">Vue.js</span><span class="tag">D3.js</span><span class="tag">Firebase</span></div></div></div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="section-title"><h2>Hubungi Saya</h2><p>Siap untuk kolaborasi?</p></div>
+        <div class="contact-content">
+            <p>Saya selalu terbuka untuk diskusi tentang proyek baru, ide kreatif, atau kesempatan untuk menjadi bagian dari visi Anda.</p>
+            <div class="social-links">
+                <a href="#" class="social-link" title="GitHub">🐙</a>
+                <a href="#" class="social-link" title="LinkedIn">💼</a>
+                <a href="#" class="social-link" title="Email">✉️</a>
+                <a href="#" class="social-link" title="Twitter">🐦</a>
+            </div>
+        </div>
+    </section>
+    <footer><p>Created by <a href="https://github.com/antono4">Antono</a> | Personal Website Template - Modern Responsive Design</p></footer>
+    <script>
+        function toggleMenu(){document.querySelector('.nav-links').classList.toggle('active');}
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.querySelector('.nav-links').classList.remove('active');}});});
+        window.addEventListener('scroll',()=>{document.querySelector('nav').style.boxShadow=window.scrollY>50?'0 4px 30px rgba(0,0,0,0.3)':'none';});
+    </script>
 </body>
 </html>
