@@ -1,2 +1,26 @@
-Last updated: 2026-08-19 04:12:13 WIB
-Last updated: 2026-08-19 04:14:12 WIB
+# macan.github.io
+
+
+
+## 📋 Overview
+
+This repository contains **8 files** and is built with the following technologies:
+
+HTML
+
+## 🚀 Quick Start
+
+## ✨ Features
+
+- 📝 Auto-generated documentation
+
+## 🛠️ Technologies
+
+HTML
+
+## 📄 License
+
+MIT License
+
+---
+*Last updated: 2026-08-19 04:28:39 WIB*
